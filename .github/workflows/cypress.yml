@@ -24,14 +24,14 @@ jobs:
 
       - name: Definir variáveis de ambiente (Trello)
         run: |
-          echo "API_KEY=${{ secrets.API_KEY }}"
-          echo "TOKEN=${{ secrets.TOKEN }}"
+          echo "API_KEY=${{ SECRETS.API_KEY }}"
+          echo "TOKEN=${{ SECRETS.TOKEN }}"
 
       - name: Executar testes com Cypress
         run: npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-          TOKEN: ${{ secrets.TOKEN }}
+          API_KEY: ${{ SECRETS.API_KEY }}
+          TOKEN: ${{ SECRETS.TOKEN }}
 
       - name: Gerar HTML a partir do JSON do Mochawesome
         run: npx mochawesome-merge cypress/reports/mochawesome/*.json | npx mochawesome-report-generator --reportDir cypress/reports/html
