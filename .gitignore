@@ -13,7 +13,6 @@ cypress/downloads/
 cypress/reports/
 mochawesome-report/
 *.html
-*.json
 
 # IDEs
 .vscode/
