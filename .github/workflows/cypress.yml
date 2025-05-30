@@ -2,7 +2,7 @@ name: Cypress Tests with Mochawesome Report
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, test ]
   pull_request:
     branches: [ main ]
 
