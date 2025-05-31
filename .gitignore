@@ -9,10 +9,9 @@ cypress/screenshots/
 cypress/videos/
 cypress/downloads/
 
-# Mochawesome reports
-cypress/reports/
-mochawesome-report/
-*.html
+allure-report/
+allure-results/
+
 
 # IDEs
 .vscode/

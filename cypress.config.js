@@ -1,5 +1,7 @@
 const { defineConfig } = require("cypress");
 require('dotenv').config();
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+
 
 module.exports = defineConfig({
   e2e: {
@@ -9,15 +11,9 @@ module.exports = defineConfig({
       TOKEN: process.env.TOKEN
     },
     setupNodeEvents(on, config) {
+      allureWriter(on, config);
+      return config;
     }
   },
-
-  reporter: 'mochawesome',
-  reporterOptions: {
-    reportDir: 'cypress/reports/mochawesome',
-    overwrite: false,
-    html: false,
-    json: true
-  }
 
 });

@@ -1,10 +1,10 @@
-name: Cypress Tests with Mochawesome Report
+name: Cypress Tests with Allure Report
 
 on:
   push:
-    branches: [ main]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   cypress-run:
@@ -22,17 +22,19 @@ jobs:
       - name: Instalar dependências
         run: npm install
 
-      - name: Executar testes com Cypress
-        run: npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
+      - name: Executar testes com Cypress e Allure
         env:
           API_KEY: ${{ secrets.API_KEY }}
           TOKEN: ${{ secrets.TOKEN }}
+          CYPRESS_allure: true
+        run: npx cypress run
 
-      - name: Gerar HTML a partir do JSON do Mochawesome
-        run: npx mochawesome-merge cypress/reports/mochawesome/*.json | npx mochawesome-report-generator --reportDir cypress/reports/html
+      - name: Gerar relatório Allure
+        run: |
+          npx allure generate allure-results --clean -o allure-report
 
       - name: Publicar relatório como artefato
         uses: actions/upload-artifact@v4
         with:
-          name: mochawesome-report
-          path: cypress/reports/html
+          name: allure-report
+          path: allure-report
